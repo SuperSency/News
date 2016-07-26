@@ -70,29 +70,5 @@ public class ImageLoader {
         return null;
     }
 
-    //通过AsyncTask
-    public void showImageByAsyncTask(ImageView imageView, String url) {
-        new NewsAsyncTask(imageView, url).execute(url);
-    }
-
-    class NewsAsyncTask extends AsyncTask<String, Void, Bitmap> {
-
-        public NewsAsyncTask(ImageView imageView, String url) {
-            mImageView = imageView;
-            mUrl = url;
-        }
-
-        @Override
-        protected Bitmap doInBackground(String... params) {
-            return getBitmapFromURL(params[0]);
-        }
-
-        @Override
-        protected void onPostExecute(Bitmap bitmap) {
-            super.onPostExecute(bitmap);
-            if (mImageView.getTag().equals(mUrl)) {
-                mImageView.setImageBitmap(bitmap);
-            }
-        }
-    }
+   
 }
