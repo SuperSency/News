@@ -51,7 +51,7 @@ public class MainActivity extends Activity {
         protected void onPostExecute(List<ItemBean> itemBeans) {
             super.onPostExecute(itemBeans);
             //将得到的封装好的数据作为参数传入，通过适配器进行适配
-            NewsAdapter adapter = new NewsAdapter(MainActivity.this,itemBeans);
+            NewsAdapter adapter = new NewsAdapter(MainActivity.this,itemBeans,mListView);
             mListView.setAdapter(adapter);
         }
     }
