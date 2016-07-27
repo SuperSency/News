@@ -141,7 +141,7 @@ public class ImageLoader {
 
         if (bitmap == null) {
             //如果缓存中没有图片则联网获取
-           // new NewsAsyncTask(url).execute(url);
+            // new NewsAsyncTask(url).execute(url);
             //如果没有就设置默认图片
             imageView.setImageResource(R.mipmap.ic_launcher);
         } else {

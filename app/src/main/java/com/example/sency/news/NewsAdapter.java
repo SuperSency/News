@@ -22,6 +22,7 @@ public class NewsAdapter extends BaseAdapter implements AbsListView.OnScrollList
     private int mStart;
     private int mEnd;
     public static String[] URLS;
+    private boolean mFirstIn;
 
     public NewsAdapter(Context context, List<ItemBean> data, ListView listView) {
         //将传入的List集合中的数据放入lists中，用于后面的item中控件的设置
@@ -32,6 +33,7 @@ public class NewsAdapter extends BaseAdapter implements AbsListView.OnScrollList
         for (int i = 0; i < data.size(); i++) {
             URLS[i] = data.get(i).imageUrl;
         }
+        mFirstIn = true;
         listView.setOnScrollListener(this);
     }
 
@@ -94,11 +96,18 @@ public class NewsAdapter extends BaseAdapter implements AbsListView.OnScrollList
     //整个过程中都会调用
     @Override
     public void onScroll(AbsListView absListView, int firstVisibleItem, int visibleItemCount, int endVisibleItem) {
+        System.out.println("ccccccc");
         /**获取ListView的起始项*/
         //第一个可见元素
         mStart = firstVisibleItem;
         //第一个可见元素加上可见元素数量
         mEnd = firstVisibleItem + visibleItemCount;
+        System.out.println("hahhahahahaah");
+        //第一次显示即刚进入界面是调用
+        if (mFirstIn == true && visibleItemCount > 0) {
+            imageLoader.loadImages(mStart, mEnd);
+            mFirstIn = false;
+        }
     }
 }
 
