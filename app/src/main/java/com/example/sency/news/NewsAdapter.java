@@ -16,11 +16,13 @@ import java.util.List;
 public class NewsAdapter extends BaseAdapter {
     private List<ItemBean> lists;
     LayoutInflater inflater;
+    private ImageLoader imageLoader;
 
     public NewsAdapter(Context context, List<ItemBean> data) {
         //将传入的List集合中的数据放入lists中，用于后面的item中控件的设置
         lists = data;
         inflater = LayoutInflater.from(context);
+        imageLoader = new ImageLoader();
     }
 
     @Override
@@ -54,7 +56,10 @@ public class NewsAdapter extends BaseAdapter {
         //默认图片
         viewHolder.imageView.setImageResource(R.mipmap.ic_launcher);
         //使用线程设置图片
-         new ImageLoader().showImageByThread(viewHolder.imageView, lists.get(i).imageUrl);
+        // new ImageLoader().showImageByThread(viewHolder.imageView, lists.get(i).imageUrl);
+        //使用AsyncTask设置图片
+        //new ImageLoader().showImageByAsyncTask(viewHolder.imageView, lists.get(i).imageUrl);
+        imageLoader.showImageByAsyncTask(viewHolder.imageView, lists.get(i).imageUrl);
        //设置tag避免图片混乱错位,在ImageLoader中使用
         viewHolder.imageView.setTag(lists.get(i).imageUrl);
         viewHolder.title.setText(lists.get(i).title);
